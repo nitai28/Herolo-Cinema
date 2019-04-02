@@ -46,12 +46,12 @@ export function deleteMovie(id, movies) {
     }
 }
 
-export function saveMovie(values,movies) {
+export function saveMovie(movie, movies) {
     return (dispatch) => {
-        movieService.saveMovie(values,movies)
+        movieService.saveMovie(movie, movies)
             .then((movie) => {
                 dispatch({
-                    type:SAVE_MOVIE,
+                    type: SAVE_MOVIE,
                     payload: movie
                 })
             })

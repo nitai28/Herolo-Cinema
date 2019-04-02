@@ -25,17 +25,16 @@ export function movieReducer(state = initialState, action) {
             }
 
         case 'SAVE_MOVIE':
-            console.log(action.payload,'red')
             return {
                 ...state,
                 movies: action.payload
             }
         case 'SET_SELECTED_MOVIE_EDIT':
+            console.log(1)
             let movieToEdit = state.movies.find(movie => movie.id === action.payload);
             return {
                 ...state,
                 selectedMovieToEdit: movieToEdit
-
             }
 
         default:

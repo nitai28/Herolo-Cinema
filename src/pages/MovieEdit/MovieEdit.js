@@ -14,7 +14,7 @@ class MovieEdit extends Component {
 
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
-
+        console.log(props.movieToEdit,'23')
         this.state = {
             show: true,
             movieToEdit: (props.movieToEdit) ? props.movieToEdit : {}
@@ -29,8 +29,8 @@ class MovieEdit extends Component {
         this.setState({show: true});
     }
 
-    handleSubmit = (values) => {
-        let movieNameAvilable = this.props.movies.findIndex(movie => movie.title === values.title);
+    handleSubmit = (movieData) => {
+        let movieNameAvilable = this.props.movies.findIndex(movie => movie.title === movieData.title);
         if (movieNameAvilable !== -1) {
             Swal(
                 <div>
@@ -41,8 +41,8 @@ class MovieEdit extends Component {
         }
         else {
             (this.state.movieToEdit) ?
-                this.props.saveMovie({...this.state.movieToEdit, ...values}, this.props.movies)
-                : this.props.saveMovie(values, this.props.movies)
+                this.props.saveMovie({...this.state.movieToEdit, ...movieData}, this.props.movies)
+                : this.props.saveMovie(movieData, this.props.movies)
         }
 
 
@@ -83,14 +83,15 @@ class MovieEdit extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        movies: state.movieReducer.movies
+        movies: state.movieReducer.movies,
+
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         setSelectedMovieToEdit: (id) => dispatch(setSelectedMovieToEdit(id)),
-        saveMovie: (values, movies) => dispatch(saveMovie(values, movies))
+        saveMovie: (movie, movies) => dispatch(saveMovie(movie, movies))
     }
 }
 

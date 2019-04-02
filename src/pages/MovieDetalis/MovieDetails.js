@@ -7,16 +7,23 @@ import {Button} from 'react-bootstrap';
 import {deleteMovie, loadMovieById, setSelectedMovieToEdit} from "../../store/MovieAction";
 import MovieEdit from '../MovieEdit/MovieEdit';
 
-// import PropTypes from 'prop-types';
 
 class MovieDetails extends Component {
     state = {
         showModal: false,
-        showEditModal: false
+        showEditModal: false,
     }
 
     componentDidMount() {
         this.props.getMovieById(this.props.match.params.id, this.props.movies)
+    }
+
+    filterMovieTitle = (title) => {
+        return title.split(' ').map(function (element) {
+            element = element.replace(/[^\w\s]/gi, '')
+            element = element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()
+            return element;
+        }).join(' ');
     }
 
     deleteMovie = () => {
@@ -35,7 +42,6 @@ class MovieDetails extends Component {
                     'Your imaginary file has been deleted.',
                     'success'
                 )
-                this.props.history.push('/')
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
                     'Cancelled',
@@ -53,13 +59,13 @@ class MovieDetails extends Component {
 
     render() {
         const {movie} = this.props;
+        console.log(this.props.movie, '@$@$')
         if (movie) {
             return (
                 <div>
                     <header>
-                        <Link to={'./'}>Back</Link>
+                        <Link to={'/'}>Back</Link>
                         <Link to={`./edit/${this.props.match.params.id}`}>
-                            {/*<button onClick={() => this.props.setSelectedMovieToEdit(this.props.match.params.id)}>*/}
                             <button onClick={this.handleClick}>
                                 Edit
                             </button>
@@ -67,7 +73,7 @@ class MovieDetails extends Component {
                     </header>
                     <img src={movie.img} alt=""/>
                     <div>
-                        <h1>{movie.title}</h1>
+                        <h1>{this.filterMovieTitle(movie.title)}</h1>
                         <span>Director:{movie.director}</span>
                         <span>Time:{movie.runtime}</span>
                         <span>Genre:{movie.genre}</span>
@@ -81,19 +87,18 @@ class MovieDetails extends Component {
         return (
             <div>
 
-                <Link to={'./'}> Back </Link>
+                <Link to={'/'}> Back </Link>
                 <h1>Movie not found...</h1>
             </div>
         )
-
-
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         movie: state.movieReducer.selectedMovie,
-        movies: state.movieReducer.movies
+        movies: state.movieReducer.movies,
+        movieToEdit: state.movieReducer.selectedMovieToEdit
     }
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import MoviePreview from '../MoviePreview/MoviePreview'
@@ -22,10 +21,6 @@ const MovieList = (props) => {
             </ul>
         </div>
     );
-}
-
-MovieList.propTypes = {
-    movies: PropTypes.array.isRequired
 }
 
 

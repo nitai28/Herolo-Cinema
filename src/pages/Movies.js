@@ -9,7 +9,6 @@ import MovieList from '../components/MovieList/MovieList'
 import MovieEdit from '../pages/MovieEdit/MovieEdit'
 
 
-// import PropTypes from 'prop-types';
 
 class Movies extends Component {
     state = {
@@ -22,10 +21,10 @@ class Movies extends Component {
             this.props.loadMovies()
         
     }
-    componentWillUpdate(){
+
+    forceUpdate(){
         this.setState({...this.state,movies:this.props.movies})
     }
-
 
     render() {
         return (

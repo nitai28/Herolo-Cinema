@@ -7,7 +7,7 @@ import imgNotA from '../assets/imageNotFound.jpg'
 
 function getMovies(movieTitles) {
     const moviesPromises = movieTitles.map((movieTitle) => {
-        return fetchMovie(movieTitle);
+        return _fetchMovie(movieTitle);
     })
     return Promise.all(moviesPromises).then((movies) => {
         return (movies)
@@ -32,6 +32,11 @@ function deleteMovie(id, movies) {
     })
 }
 
+function saveMovie(movie, movies) {
+    return movie.id ? _updateMovie(movie, movies) : _addMovie(movie, movies)
+}
+
+
 function _updateMovie(movie,movies) {
     return new Promise(resolve => {
         const index = movies.findIndex(m => movie.id === m.id)
@@ -43,20 +48,17 @@ function _updateMovie(movie,movies) {
 }
 
 function _addMovie(movie,movies) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         movie.id = uniqid();
-        movie.picture = imgNotA;
-        movies.push(movie);
+        movie.img = imgNotA;
+        movies = [...movies, movie];
         resolve(movies)
     })
 }
 
-function saveMovie(movie, movies) {
-    return movie.id ? _updateMovie(movie, movies) : _addMovie(movie, movies)
-}
 
 
-function fetchMovie(movieTitle) {
+function _fetchMovie(movieTitle) {
     return new Promise(resolve => {
         axios.get(`http://www.omdbapi.com/?t=+${movieTitle}&&apikey=388ebc5`)
             .then(res => {
