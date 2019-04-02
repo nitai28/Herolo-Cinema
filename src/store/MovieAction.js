@@ -8,6 +8,7 @@ const LOAD_MOVIE = 'LOAD_MOVIE';
 const DELETE_MOVIE = 'DELETE_MOVIE';
 const SET_SELECTED_MOVIE_EDIT = 'SET_SELECTED_MOVIE_EDIT';
 const SAVE_MOVIE = 'SAVE_MOVIE';
+const TOGGLE_MODAL='TOGGLE_MODAL'
 
 export function loadMovies() {
     return (dispatch) => {
@@ -63,6 +64,14 @@ export function setSelectedMovieToEdit(id) {
         dispatch({
             type: SET_SELECTED_MOVIE_EDIT,
             payload: id
+        })
+    }
+}
+
+export function toggleModal() {
+    return (dispatch) => {
+        dispatch({
+            type: TOGGLE_MODAL
         })
     }
 }

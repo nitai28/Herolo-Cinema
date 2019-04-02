@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 
 
 import MovieForm from '../../components/MovieForm/MovieForm'
-import {setSelectedMovieToEdit, saveMovie, loadMovieById} from "../../store/MovieAction";
+import {setSelectedMovieToEdit, saveMovie, loadMovieById, toggleModal} from "../../store/MovieAction";
 
 class MovieEdit extends Component {
 
@@ -32,6 +32,7 @@ class MovieEdit extends Component {
 
         }
         this.props.setSelectedMovieToEdit(null);
+        this.props.toggleModal();
     }
 
     handleShow() {
@@ -69,7 +70,7 @@ class MovieEdit extends Component {
         }
         return (
             <div>
-                <Modal show={this.props.show} onHide={this.handleClose}>
+                <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
@@ -103,7 +104,9 @@ const mapDispatchToProps = dispatch => {
     return {
         setSelectedMovieToEdit: (id) => dispatch(setSelectedMovieToEdit(id)),
         saveMovie: (movie, movies) => dispatch(saveMovie(movie, movies)),
-        getMovieById: (id, movies) => dispatch(loadMovieById(id, movies))
+        getMovieById: (id, movies) => dispatch(loadMovieById(id, movies)),
+        toggleModal:()=>dispatch(toggleModal())
+
     }
 }
 

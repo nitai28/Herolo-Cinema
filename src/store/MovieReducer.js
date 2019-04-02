@@ -1,7 +1,8 @@
 const initialState = {
     movies: [],
     selectedMovie: null,
-    selectedMovieToEdit: null
+    selectedMovieToEdit: null,
+    showModal: false
 }
 
 export function movieReducer(state = initialState, action) {
@@ -34,6 +35,11 @@ export function movieReducer(state = initialState, action) {
             return {
                 ...state,
                 selectedMovieToEdit: movieToEdit
+            }
+        case 'TOGGLE_MODAL':
+            return {
+                ...state,
+                showModal: !state.showModal
             }
 
         default:

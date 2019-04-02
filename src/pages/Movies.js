@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Button} from 'react-bootstrap';
 
 
-import {loadMovies} from "../store/MovieAction";
+import {loadMovies,toggleModal} from "../store/MovieAction";
 import MovieList from '../components/MovieList/MovieList';
 import MovieEdit from '../pages/MovieEdit/MovieEdit';
 
@@ -12,7 +12,7 @@ import MovieEdit from '../pages/MovieEdit/MovieEdit';
 
 class Movies extends Component {
     state = {
-        showModal: false,
+        // showModal: false,
         movies: ''
     }
 
@@ -27,9 +27,9 @@ class Movies extends Component {
             <div>
                 <Button
                     variant="primary"
-                    onClick={() => this.setState({...this.state, showModal: true})}
+                    onClick={() => this.props.toggleModal()}
                 >Add Movie</Button>
-                {this.state.showModal ? <MovieEdit show={true}/> : null}
+                {this.props.openModal ? <MovieEdit show={this.props.openModal} /> : null}
                 <MovieList movies={(this.state.movies)?this.state.movies:this.props.movies}/>
             </div>
         );
@@ -38,13 +38,16 @@ class Movies extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        movies: state.movieReducer.movies
+        movies: state.movieReducer.movies,
+        openModal:state.movieReducer.showModal
+
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadMovies: () => dispatch(loadMovies())
+        loadMovies: () => dispatch(loadMovies()),
+        toggleModal:()=>dispatch(toggleModal())
 
     }
 }
