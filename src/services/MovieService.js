@@ -4,7 +4,6 @@ import uniqid from 'uniqid'
 import imgNotA from '../assets/imageNotFound.jpg'
 
 
-
 function getMovies(movieTitles) {
     const moviesPromises = movieTitles.map((movieTitle) => {
         return _fetchMovie(movieTitle);
@@ -24,7 +23,7 @@ function getMovieById(id, movies) {
 
 function deleteMovie(id, movies) {
     return new Promise((resolve) => {
-        const index = movies.findIndex(movie => movie.id === id)
+        const index = movies.findIndex(movie => movie.id === id);
         if (index !== -1) {
             movies.splice(index, 1)
         }
@@ -37,9 +36,9 @@ function saveMovie(movie, movies) {
 }
 
 
-function _updateMovie(movie,movies) {
+function _updateMovie(movie, movies) {
     return new Promise(resolve => {
-        const index = movies.findIndex(m => movie.id === m.id)
+        const index = movies.findIndex(m => movie.id === m.id);
         if (index !== -1) {
             movies[index] = movie
         }
@@ -47,7 +46,7 @@ function _updateMovie(movie,movies) {
     })
 }
 
-function _addMovie(movie,movies) {
+function _addMovie(movie, movies) {
     return new Promise(resolve => {
         movie.id = uniqid();
         movie.img = imgNotA;
@@ -55,7 +54,6 @@ function _addMovie(movie,movies) {
         resolve(movies)
     })
 }
-
 
 
 function _fetchMovie(movieTitle) {

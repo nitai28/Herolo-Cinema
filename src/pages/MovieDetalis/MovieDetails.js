@@ -20,8 +20,8 @@ class MovieDetails extends Component {
 
     filterMovieTitle = (title) => {
         return title.split(' ').map(function (element) {
-            element = element.replace(/[^\w\s]/gi, '')
-            element = element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()
+            element = element.replace(/[^\w\s]/gi, '');
+            element = element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
             return element;
         }).join(' ');
     }
@@ -59,17 +59,14 @@ class MovieDetails extends Component {
 
     render() {
         const {movie} = this.props;
-        console.log(this.props.movie, '@$@$')
         if (movie) {
             return (
                 <div>
                     <header>
                         <Link to={'/'}>Back</Link>
-                        <Link to={`./edit/${this.props.match.params.id}`}>
                             <button onClick={this.handleClick}>
                                 Edit
                             </button>
-                        </Link>
                     </header>
                     <img src={movie.img} alt=""/>
                     <div>
@@ -80,7 +77,7 @@ class MovieDetails extends Component {
                         <span>Year:{movie.year}</span>
                     </div>
                     <Button variant="danger" onClick={this.deleteMovie}>delete</Button>
-                    <MovieEdit movieToEdit={movie} show={this.state.showEditModal}/>
+                    {this.props.movieToEdit && <MovieEdit show={this.state.showEditModal}/>}
                 </div>
             );
         }

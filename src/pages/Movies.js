@@ -5,8 +5,8 @@ import {Button} from 'react-bootstrap';
 
 
 import {loadMovies} from "../store/MovieAction";
-import MovieList from '../components/MovieList/MovieList'
-import MovieEdit from '../pages/MovieEdit/MovieEdit'
+import MovieList from '../components/MovieList/MovieList';
+import MovieEdit from '../pages/MovieEdit/MovieEdit';
 
 
 
@@ -20,10 +20,6 @@ class Movies extends Component {
         if (!this.props.movies.length)
             this.props.loadMovies()
         
-    }
-
-    forceUpdate(){
-        this.setState({...this.state,movies:this.props.movies})
     }
 
     render() {
@@ -40,7 +36,6 @@ class Movies extends Component {
     }
 }
 
-//
 const mapStateToProps = (state) => {
     return {
         movies: state.movieReducer.movies

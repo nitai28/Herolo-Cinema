@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 
 
 import MovieForm from '../../components/MovieForm/MovieForm'
-import {setSelectedMovieToEdit, saveMovie} from "../../store/MovieAction";
+import {setSelectedMovieToEdit, saveMovie, loadMovieById} from "../../store/MovieAction";
 
 class MovieEdit extends Component {
 
@@ -14,15 +14,24 @@ class MovieEdit extends Component {
 
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        console.log(props.movieToEdit,'23')
         this.state = {
             show: true,
-            movieToEdit: (props.movieToEdit) ? props.movieToEdit : {}
+            movieToEdit: (props.selectedMovie) ? props.selectedMovie : {}
         };
+    }
+
+    componentDidMount() {
+        if (this.props.selectedMovie)
+            this.setState({...this.state, movieToEdit: this.props.selectedMovie})
     }
 
     handleClose() {
         this.setState({show: false});
+        if (this.props.selectedMovie) {
+            this.props.getMovieById(this.props.selectedMovie.id, this.props.movies);
+
+        }
+        this.props.setSelectedMovieToEdit(null);
     }
 
     handleShow() {
@@ -32,17 +41,18 @@ class MovieEdit extends Component {
     handleSubmit = (movieData) => {
         let movieNameAvilable = this.props.movies.findIndex(movie => movie.title === movieData.title);
         if (movieNameAvilable !== -1) {
-            Swal(
-                <div>
-                    <h1>Error</h1>
-                    <p>The same movie name already exist</p>
-                </div>
-            )
+            Swal.fire({
+                title: 'Movie name already exist',
+                text: 'please change the name',
+                type: 'warning',
+                confirmButtonText: 'ok',
+            })
         }
         else {
             (this.state.movieToEdit) ?
                 this.props.saveMovie({...this.state.movieToEdit, ...movieData}, this.props.movies)
                 : this.props.saveMovie(movieData, this.props.movies)
+            this.handleClose();
         }
 
 
@@ -59,7 +69,7 @@ class MovieEdit extends Component {
         }
         return (
             <div>
-                <Modal show={this.props.show && this.state.show} onHide={this.handleClose}>
+                <Modal show={this.props.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
@@ -84,6 +94,7 @@ class MovieEdit extends Component {
 const mapStateToProps = (state) => {
     return {
         movies: state.movieReducer.movies,
+        selectedMovie: state.movieReducer.selectedMovieToEdit
 
     }
 }
@@ -91,7 +102,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         setSelectedMovieToEdit: (id) => dispatch(setSelectedMovieToEdit(id)),
-        saveMovie: (movie, movies) => dispatch(saveMovie(movie, movies))
+        saveMovie: (movie, movies) => dispatch(saveMovie(movie, movies)),
+        getMovieById: (id, movies) => dispatch(loadMovieById(id, movies))
     }
 }
 
