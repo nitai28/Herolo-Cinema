@@ -58,7 +58,7 @@ function _addMovie(movie, movies) {
 
 function _fetchMovie(movieTitle) {
     return new Promise(resolve => {
-        axios.get(`http://www.omdbapi.com/?t=+${movieTitle}&&apikey=388ebc5`)
+        axios.get(`https://www.omdbapi.com/?t=+${movieTitle}&&apikey=388ebc5`)
             .then(res => {
                 const {Title, Director, Genre, Year, Runtime, Poster} = res.data;
                 resolve({
