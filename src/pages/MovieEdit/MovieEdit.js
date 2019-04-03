@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button, Modal} from 'react-bootstrap';
+import { Modal} from 'react-bootstrap';
 import {setSelectedMovieToEdit, saveMovie, loadMovieById, toggleModal} from "../../store/MovieAction";
 import Swal from 'sweetalert2'
 import './MovieEdit.css'
@@ -77,14 +77,6 @@ class MovieEdit extends Component {
                     <Modal.Body className="edit-modal-body">
                         <MovieForm initialValues={initialValues} onSubmit={this.handleSubmit}/>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={this.handleClose}>
-                            Save
-                        </Button>
-                    </Modal.Footer>
                 </Modal>
             </div>
         )

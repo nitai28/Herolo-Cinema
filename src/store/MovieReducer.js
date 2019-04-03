@@ -42,6 +42,12 @@ export function movieReducer(state = initialState, action) {
                 showModal: !state.showModal
             }
 
+        case 'CLOSE_MODAL':
+            return {
+                ...state,
+                showModal: action.payload
+            }
+
         default:
             return state;
     }

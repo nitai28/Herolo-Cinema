@@ -1,0 +1,26 @@
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.form-field label{
+    margin-right: 6px;
+
+}
+.error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-size: 15px;
+    height: 30px;
+}
+.save-data-button{
+    margin-top: 15px;
+    width: 80px;
+    font-size: 17px;
+}
+input{
+    text-align: left;
+    padding: 3px;
+}

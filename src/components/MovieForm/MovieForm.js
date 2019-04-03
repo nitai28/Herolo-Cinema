@@ -1,6 +1,8 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form'
+import {Button} from 'react-bootstrap';
 
+import './MovieForm.css'
 
 const validate = values => {
     const errors = {}
@@ -21,11 +23,11 @@ const validate = values => {
 
 const renderInput = ({input, meta, label}) => {
     return (
-        <div>
+        <div className="form-field">
             <label>{label}</label>
             <input {...input}/>
             {meta.error && meta.touched &&
-            <span>{meta.error}</span>
+            <span className="error">{meta.error}</span>
             }
         </div>
     )
@@ -42,7 +44,7 @@ const MovieForm = (props) => {
             <Field name="runtime" label="RunTime" type="number" component={renderInput}/>
             <Field name="genre" label="Genre" type="string" component={renderInput}/>
             <Field name="director" label="Director" type="string" component={renderInput}/>
-            <button type="submit">save</button>
+            <Button className="save-data-button" type="submit" variant="primary">save</Button>
         </form>
     )
 }

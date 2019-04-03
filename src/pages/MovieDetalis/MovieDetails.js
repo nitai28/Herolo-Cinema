@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import Swal from 'sweetalert2'
 import {Button, Image} from 'react-bootstrap';
 
-import {deleteMovie, loadMovieById, setSelectedMovieToEdit, toggleModal} from "../../store/MovieAction";
+import {deleteMovie, loadMovieById, setSelectedMovieToEdit, closeModal} from "../../store/MovieAction";
 import MovieEdit from '../MovieEdit/MovieEdit';
 import './MovieDetails.css'
 
@@ -64,7 +64,7 @@ class MovieDetails extends Component {
                 <div className="movie-details">
                     <header className="top-details">
                         <Link to={'/'}>
-                            <Button variant="warning" onClick={this.props.toggleModal}>Back</Button>
+                            <Button variant="warning" onClick={this.props.closeModal(false)}>Back</Button>
                         </Link>
                         <Button variant="warning" onClick={this.handleClick}>
                             Edit
@@ -107,7 +107,7 @@ const mapDispatchToProps = dispatch => {
         getMovieById: (id, movies) => dispatch(loadMovieById(id, movies)),
         deleteMovie: (id, movies) => dispatch(deleteMovie(id, movies)),
         setSelectedMovieToEdit: (id) => dispatch(setSelectedMovieToEdit(id)),
-        toggleModal: () => dispatch(toggleModal())
+        closeModal: () => dispatch(closeModal(false))
 
     }
 }

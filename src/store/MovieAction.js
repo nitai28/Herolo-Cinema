@@ -8,7 +8,8 @@ const LOAD_MOVIE = 'LOAD_MOVIE';
 const DELETE_MOVIE = 'DELETE_MOVIE';
 const SET_SELECTED_MOVIE_EDIT = 'SET_SELECTED_MOVIE_EDIT';
 const SAVE_MOVIE = 'SAVE_MOVIE';
-const TOGGLE_MODAL='TOGGLE_MODAL'
+const TOGGLE_MODAL='TOGGLE_MODAL';
+const CLOSE_MODAL='CLOSE_MODAL';
 
 export function loadMovies() {
     return (dispatch) => {
@@ -72,6 +73,15 @@ export function toggleModal() {
     return (dispatch) => {
         dispatch({
             type: TOGGLE_MODAL
+        })
+    }
+}
+
+export function closeModal(modalFlag) {
+    return (dispatch) => {
+        dispatch({
+            type: CLOSE_MODAL,
+            payload:modalFlag
         })
     }
 }
