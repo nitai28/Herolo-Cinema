@@ -1,0 +1,16 @@
+
+.edit-modal{
+    top:100px;
+}
+.edit-modal-header{
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.edit-modal-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

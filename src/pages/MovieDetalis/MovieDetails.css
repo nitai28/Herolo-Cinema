@@ -1,0 +1,22 @@
+.movie-details{
+    height: 100%;
+}
+.top-details{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+.delete-button{
+    margin: 50px;
+    width: 70px;
+}
+.info{
+    color: #28282e;
+}
+.movie-details-main-title{
+    font-weight: bold;
+    font-size: 35px;
+}
+.small-info{
+    font-size: 25px;
+}

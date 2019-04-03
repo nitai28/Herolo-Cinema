@@ -1,6 +1,7 @@
 import React from 'react';
 
 import imgNotA from '../../assets/imageNotFound.jpg'
+import './MoviePreview.css'
 
 const MoviePreview = ({movie}) => {
     const movieImage = movie.img || imgNotA
@@ -14,14 +15,15 @@ const MoviePreview = ({movie}) => {
     }
 
     return (
-        <div>
-            <img src={movieImage} alt="Movie" width="300" height="300"/>
-            <h1>{filterMovieTitle(movie.title)}</h1>
-            <span>Director: {movie.director}</span>
+        <div className="movie-preview">
+            <img className="movie-img" src={movieImage} alt="Movie"/>
+            <div>
+                <h1 className='movie-title'>{filterMovieTitle(movie.title)}</h1>
+                <div className="second-title">Director by: {movie.director}</div>
+            </div>
         </div>
     )
 }
-
 
 
 export default MoviePreview;

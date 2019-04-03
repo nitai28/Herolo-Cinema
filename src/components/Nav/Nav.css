@@ -1,0 +1,49 @@
+.navbar-content {
+    display: flex;
+    background-color: #28282e;
+    color: white;
+    height: 100px;
+    margin-bottom: 20px;
+
+}
+
+.nav-logo {
+    margin-left: 20px;
+}
+
+img {
+    max-width: 100px;
+    position: static;
+    height: 60px;
+}
+
+span {
+    margin-left: 15px;
+    font-size: 55px;
+    float: right;
+    line-height: 102px;
+    margin-right: 8px;
+}
+
+@media (max-width: 750px) {
+
+    img {
+        max-width: 60px;
+    }
+
+    span {
+        line-height: 116px;
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 534px) {
+    img {
+        max-width: 60px;
+    }
+
+    span {
+        font-size: 30px;
+    }
+
+}

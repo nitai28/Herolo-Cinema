@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 import Swal from 'sweetalert2'
-import {Button} from 'react-bootstrap';
+import {Button, Image} from 'react-bootstrap';
 
-import {deleteMovie, loadMovieById, setSelectedMovieToEdit} from "../../store/MovieAction";
+import {deleteMovie, loadMovieById, setSelectedMovieToEdit, toggleModal} from "../../store/MovieAction";
 import MovieEdit from '../MovieEdit/MovieEdit';
-
+import './MovieDetails.css'
 
 class MovieDetails extends Component {
     state = {
@@ -61,30 +61,33 @@ class MovieDetails extends Component {
         const {movie} = this.props;
         if (movie) {
             return (
-                <div>
-                    <header>
-                        <Link to={'/'}>Back</Link>
-                            <button onClick={this.handleClick}>
-                                Edit
-                            </button>
+                <div className="movie-details">
+                    <header className="top-details">
+                        <Link to={'/'}>
+                            <Button variant="warning" onClick={this.props.toggleModal}>Back</Button>
+                        </Link>
+                        <Button variant="warning" onClick={this.handleClick}>
+                            Edit
+                        </Button>
                     </header>
-                    <img src={movie.img} alt=""/>
-                    <div>
-                        <h1>{this.filterMovieTitle(movie.title)}</h1>
-                        <span>Director:{movie.director}</span>
-                        <span>Time:{movie.runtime}</span>
-                        <span>Genre:{movie.genre}</span>
-                        <span>Year:{movie.year}</span>
+                    <Image src={movie.img} fluid thumbnail/>
+                    <div className="info">
+                        <h1 className="movie-details-main-title">{this.filterMovieTitle(movie.title)}</h1>
+                        <div className="small-info">Director: {movie.director}</div>
+                        <div className="small-info">Time: {movie.runtime}</div>
+                        <div className="small-info">Genre: {movie.genre}</div>
+                        <div className="small-info">Year: {movie.year}</div>
                     </div>
-                    <Button variant="danger" onClick={this.deleteMovie}>delete</Button>
+                    <Button className="delete-button" variant="danger" onClick={this.deleteMovie}>delete</Button>
                     {this.props.movieToEdit && <MovieEdit show={this.state.showEditModal}/>}
                 </div>
             );
         }
         return (
             <div>
-
-                <Link to={'/'}> Back </Link>
+                <Link to={'/'}>
+                    <Button variant="warning">Back </Button>
+                </Link>
                 <h1>Movie not found...</h1>
             </div>
         )
@@ -103,7 +106,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getMovieById: (id, movies) => dispatch(loadMovieById(id, movies)),
         deleteMovie: (id, movies) => dispatch(deleteMovie(id, movies)),
-        setSelectedMovieToEdit: (id) => dispatch(setSelectedMovieToEdit(id))
+        setSelectedMovieToEdit: (id) => dispatch(setSelectedMovieToEdit(id)),
+        toggleModal: () => dispatch(toggleModal())
 
     }
 }

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Modal} from 'react-bootstrap';
-import Swal from 'sweetalert2'
-
-
-import MovieForm from '../../components/MovieForm/MovieForm'
 import {setSelectedMovieToEdit, saveMovie, loadMovieById, toggleModal} from "../../store/MovieAction";
+import Swal from 'sweetalert2'
+import './MovieEdit.css'
+import MovieForm from '../../components/MovieForm/MovieForm'
+
 
 class MovieEdit extends Component {
 
@@ -69,12 +69,12 @@ class MovieEdit extends Component {
             director: selectedMovie.director || ''
         }
         return (
-            <div>
-                <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+            <div className="move-edit">
+                <Modal className="edit-modal" show={this.state.show} onHide={this.handleClose}>
+                    <Modal.Header className="edit-modal-header" closeButton>
+                        <Modal.Title>Movie Modal</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body className="edit-modal-body">
                         <MovieForm initialValues={initialValues} onSubmit={this.handleSubmit}/>
                     </Modal.Body>
                     <Modal.Footer>

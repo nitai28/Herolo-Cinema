@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
 import {Button} from 'react-bootstrap';
-
-
 import {loadMovies,toggleModal} from "../store/MovieAction";
+
+
 import MovieList from '../components/MovieList/MovieList';
 import MovieEdit from '../pages/MovieEdit/MovieEdit';
 
@@ -12,7 +11,6 @@ import MovieEdit from '../pages/MovieEdit/MovieEdit';
 
 class Movies extends Component {
     state = {
-        // showModal: false,
         movies: ''
     }
 
