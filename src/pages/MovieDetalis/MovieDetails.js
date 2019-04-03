@@ -24,7 +24,7 @@ class MovieDetails extends Component {
             element = element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
             return element;
         }).join(' ');
-    }
+    };
 
     deleteMovie = () => {
         Swal.fire({
@@ -42,6 +42,7 @@ class MovieDetails extends Component {
                     'Your imaginary file has been deleted.',
                     'success'
                 )
+                this.props.history.push('/');
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
                     'Cancelled',
