@@ -10,7 +10,7 @@ const validate = values => {
         errors.title = 'Required'
     if (!values.year) {
         errors.year = 'Required'
-    } else if (values.year < 1900 || values.year > (new Date().getFullYear()))
+    } else if (typeof(values.year) !== "number"|| values.year < 1900 || values.year > (new Date().getFullYear()))
         errors.year = 'Please enter valid year'
     if (!values.runtime)
         errors.runtime = 'Required'
