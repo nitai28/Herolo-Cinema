@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Modal} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 import {setSelectedMovieToEdit, saveMovie, loadMovieById, toggleModal} from "../../store/MovieAction";
 import Swal from 'sweetalert2'
 import './MovieEdit.css'
@@ -39,25 +39,30 @@ class MovieEdit extends Component {
         this.setState({show: true});
     }
 
+    handleErrorMessage() {
+        Swal.fire({
+            title: 'Movie name already exist',
+            text: 'please change the name',
+            type: 'warning',
+            confirmButtonText: 'ok',
+        })
+
+    };
+
     handleSubmit = (movieData) => {
-        let movieNameAvilable = this.props.movies.findIndex(movie => movie.title === movieData.title);
-        if (movieNameAvilable !== -1) {
-            Swal.fire({
-                title: 'Movie name already exist',
-                text: 'please change the name',
-                type: 'warning',
-                confirmButtonText: 'ok',
-            })
-        }
-        else {
+        let moviesArray = this.props.movies;
+        let movieSelectd = this.props.selectedMovie;
+        let movieNameAvailable = moviesArray.findIndex(movie => movie.title === movieData.title);
+        if ((movieNameAvailable !== -1 && (!movieSelectd || movieSelectd.id !== moviesArray[movieNameAvailable].id))) {
+            this.handleErrorMessage();
+        } else {
             (this.state.movieToEdit) ?
-                this.props.saveMovie({...this.state.movieToEdit, ...movieData}, this.props.movies)
-                : this.props.saveMovie(movieData, this.props.movies)
+                this.props.saveMovie({...this.state.movieToEdit, ...movieData}, moviesArray)
+                : this.props.saveMovie(movieData, moviesArray)
             this.handleClose();
         }
 
-
-    }
+    };
 
     render() {
         const selectedMovie = this.state.movieToEdit;
@@ -97,7 +102,7 @@ const mapDispatchToProps = dispatch => {
         setSelectedMovieToEdit: (id) => dispatch(setSelectedMovieToEdit(id)),
         saveMovie: (movie, movies) => dispatch(saveMovie(movie, movies)),
         getMovieById: (id, movies) => dispatch(loadMovieById(id, movies)),
-        toggleModal:()=>dispatch(toggleModal())
+        toggleModal: () => dispatch(toggleModal())
 
     }
 }
