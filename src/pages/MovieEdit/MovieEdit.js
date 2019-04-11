@@ -45,7 +45,7 @@ class MovieEdit extends Component {
             text: 'please change the name',
             type: 'warning',
             confirmButtonText: 'ok',
-        })
+        });
 
     };
 
@@ -61,7 +61,6 @@ class MovieEdit extends Component {
                 : this.props.saveMovie(movieData, moviesArray)
             this.handleClose();
         }
-
     };
 
     render() {
