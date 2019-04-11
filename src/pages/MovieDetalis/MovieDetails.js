@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
-import Swal from 'sweetalert2'
+import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 import {Button, Image} from 'react-bootstrap';
 
 import {deleteMovie, loadMovieById, setSelectedMovieToEdit, closeModal} from "../../store/MovieAction";
 import MovieEdit from '../MovieEdit/MovieEdit';
-import './MovieDetails.css'
+import './MovieDetails.css';
 
 class MovieDetails extends Component {
     state = {
@@ -35,8 +35,8 @@ class MovieDetails extends Component {
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'No, keep it'
         }).then((result) => {
-            this.props.deleteMovie(this.props.match.params.id, this.props.movies);
             if (result.value) {
+            this.props.deleteMovie(this.props.match.params.id, this.props.movies);
                 Swal.fire(
                     'Deleted!',
                     'Your imaginary file has been deleted.',
