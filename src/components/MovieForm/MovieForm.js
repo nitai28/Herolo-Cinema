@@ -5,19 +5,19 @@ import {Button} from 'react-bootstrap';
 import './MovieForm.css'
 
 const validate = values => {
-    const errors = {}
-    if (!values.title)
-        errors.title = 'Required'
-    if (!values.year) {
-        errors.year = 'Required'
+    const errors = {};
+    if (!values.title || !values.title.trim())
+        errors.title = 'Required';
+    if (!values.year || !values.year.trim()) {
+        errors.year = 'Required';
     } else if (isNaN(+values.year) || values.year < 1900 || values.year > (new Date().getFullYear()))
-        errors.year = 'Please enter valid year'
-    if (!values.runtime)
-        errors.runtime = 'Required'
-    if (!values.genre)
-        errors.genre = 'Required'
-    if (!values.director)
-        errors.director = 'Required'
+        errors.year = 'Please enter valid year';
+    if (!values.runtime || !values.runtime.trim())
+        errors.runtime = 'Required';
+    if (!values.genre || !values.genre.trim())
+        errors.genre = 'Required';
+    if (!values.director || !values.director.trim())
+        errors.director = 'Required';
     return errors
 }
 
